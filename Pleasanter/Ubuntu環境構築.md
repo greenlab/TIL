@@ -184,3 +184,79 @@ $ sudo -u <プリザンターを起動するユーザ> /usr/local/bin/dotnet Imp
 
 ダウンロードしたものがまずかったか？  
 タイムアップなので、今回はココまで。  
+
+## 2025/05/06  Podman上でPleasanter環境作成。
+
+Ubuntu環境のせいかと思い、クリーンインストールしてみたが、ダメだったので、Dockerによるインストールを試してみる。  
+※この時点で、Windows 11 にインストールして、お試し済み。  
+
+基本はdockerによる作成方法。
+
+https://pleasanter.org/ja/manual/getting-started-pleasanter-docker  
+https://hub.docker.com/r/implem/pleasanter  
+
+手順に従い、".env" と、"docker-composer.yml" 作成。
+
+.env
+```
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=postgres
+POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
+Implem_Pleasanter_Rds_PostgreSQL_SaConnectionString='Server=db;Database=postgres;UID=postgres;PWD=postgres'
+Implem_Pleasanter_Rds_PostgreSQL_OwnerConnectionString='Server=db;Database=#ServiceName#;UID=#ServiceName#_Owner;PWD=owner'
+Implem_Pleasanter_Rds_PostgreSQL_UserConnectionString='Server=db;Database=#ServiceName#;UID=#ServiceName#_User;PWD=user'
+```
+設定の適当さには目をつぶる…。
+
+docker-composer.yml
+```
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_HOST_AUTH_METHOD
+      - POSTGRES_INITDB_ARGS
+  pleasanter:
+    container_name: pleasanter
+    image: implem/pleasanter
+    depends_on:
+      - db
+    environment:
+      Implem.Pleasanter_Rds_PostgreSQL_SaConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_SaConnectionString}
+      Implem.Pleasanter_Rds_PostgreSQL_OwnerConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_OwnerConnectionString}
+      Implem.Pleasanter_Rds_PostgreSQL_UserConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_UserConnectionString}
+  codedefiner:
+    container_name: codedefiner
+    image: implem/pleasanter:codedefiner
+    depends_on:
+      - db
+    environment:
+      Implem.Pleasanter_Rds_PostgreSQL_SaConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_SaConnectionString}
+      Implem.Pleasanter_Rds_PostgreSQL_OwnerConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_OwnerConnectionString}
+      Implem.Pleasanter_Rds_PostgreSQL_UserConnectionString: ${Implem_Pleasanter_Rds_PostgreSQL_UserConnectionString}
+
+```
+変更点なし。
+
+```
+sudo podman compose run codedefiner _rds
+sudo podman compose run -p 50001:8080 pleasanter
+```
+
+これでローカルホスト内での動作は確認できたが、ローカルホスト外から繋がらない。  
+何故だ？？
+
+* ufw … 無効
+* ss -tuln … 0.0.0.0:50001 がLISTENになっているので、一見問題なさそう。
+
+せめてイントラ内で繋がらないと意味が無いのだが、とりあえず動くことは確認できたので、直接インストールよりはマシという印象。
