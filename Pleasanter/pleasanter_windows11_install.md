@@ -158,10 +158,57 @@ PS > dotnet Implem.CodeDefiner.dll _rds /l "ja" /z "Tokyo Standard Time"
 
 4.1.8.9. パスワード変更 GreenLab0429
 
+### 4.2. プリザンターからメールを送信できるように設定する  
+
+当初、gmail をSMTPサーバーとして使用するよう設定したものの、メールが送信できていないようだったので、下記を基にダミーメールサーバー(smtp4dev)による方法で確認する。
+
+https://qiita.com/implem-taguchi/items/09b059e1c7efa3255d11
+
+#### 4.2.1. smtp4dev のダウンロードとインストール
+
+1. [smtp4dev](https://github.com/rnwood/smtp4dev) の画面右 Releases から、最新版をクリック(今回、3.8.6)。  
+2. Assets から、Rnwood.Smtp4dev-win-x64-x.x.x.zip をダウンロード
+3. zipファイルを解凍
+4. 解凍したzipファイルから、Rnwood.Smtp4dev.exe をダブルクリックして実行。
+5. コンソールが起動し、smtp4dev が実行される。
+
+http://localhost:5000
+
+### 4.2.2. プリザンターの設定変更
+
+3.2.6. 下記　Mail.json を編集する。
+
+/web/pleasanter/Implem.Pleasanter/App_Data/Parameters/Mail.json
+
+```
+{
+    "SmtpHost": "localhost",        // smtp4dev があるサイト。同じ場合は、localhost でOK
+    "SmtpPort": 25,                 // SSL使わないので25
+    "SmtpUserName": null,           // null
+    "SmtpPassword": null,           // null
+    "SmtpEnableSsl": false,         // SSL使わないので false
+    "ServerCertificateValidationCallback": false,
+    "SecureSocketOptions": null,
+    "FixedFrom": null,
+    "AllowedFrom": null,
+    "SupportFrom": "\"Pleasanter.org\" <support@pleasanter.org>",
+    "InternalDomains": "",
+    "Encoding": null,
+    "ContentEncoding": null
+}
+```
+
+### 4.2.3. プリザンターサーバー再起動
+
+IIS を起動し、「Default Web Site」を再起動
 
 
 
-プリザンターからメールを送信できるように設定する
+
+---
+
+
+
 プリザンターのリマインダー機能を有効化する
 プリザンターのデータベース(SQL Server)をバックアップする
 
