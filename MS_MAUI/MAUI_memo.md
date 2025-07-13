@@ -262,4 +262,88 @@ https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/layouts/flexlayout?
 
 ![聖杯レイアウト](img/holy-grail.png)
 
+### ナビゲーション
+
+#### ナビゲーションの準備
+
+App.xaml.cs
+```
+public partial class App : Application
+{
+    public App()
+    {
+        InitializeComponent();
+        MainPage = new NavigationPage(new MainPage());
+    }
+}
+```
+
+MainPage.xaml.cs
+```
+private async void OnNextClicked(object sender, EventArgs e)
+{
+    await Navigation.PushAsync(new NextPage());
+}
+```
+
+NextPage.xaml.cs
+```
+private async void OnBackClicked(object sender, EventArgs e)
+{
+    await Navigation.PopAsync();
+}
+```
+
+#### ナビゲーションの種類
+
+| メソッド名 | 説明 |
+|--|--|
+| PushAsync | 次のページに遷移する |
+| PushModalAsync | 次のページにモーダルで遷移する |
+| PopAsync | 前のページに遷移する |
+| PopModalAsync | 前のページにモーダルで遷移する |
+| PopToRootAsync | ルートのページに遷移する |
+| RemovePage | 指定ページをヒストリーから削除する |
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/pages/navigationpage?view=net-maui-9.0
+
+### ポップアップ
+
+いわゆるメッセージボックス
+
+#### ポップアップの種類
+
+1ボタンのみ
+```
+await DisplayAlert(
+    "<タイトル>",
+    "<表示メッセージ>",
+    "<ボタンの表示>"
+);
+```
+
+2ボタンのみ
+```
+boot result = await DisplayAlert(
+    "<タイトル>",
+    "<表示メッセージ>",
+    "<YESの表示>",          // true
+    "<NOの表示>"            // false
+);
+```
+
+1行入力
+```
+string result = await DisplayPromptAsync(
+    "<タイトル>",
+    "<表示メッセージ>"
+)
+```
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/pop-ups?view=net-maui-9.0
+
+
+
 
