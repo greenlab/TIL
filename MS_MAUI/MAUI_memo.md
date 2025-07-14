@@ -345,5 +345,152 @@ string result = await DisplayPromptAsync(
 https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/pop-ups?view=net-maui-9.0
 
 
+### リスト表示
+
+#### ListView コントロール
+
+##### XAML
+```
+<ListView>
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            表示するコントロール
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+```
+
+##### よく使うListViewコントロールの属性
+
+| 属性(プロパティ) | 説明 |
+|-------|-------|
+| ItemSource | コレクションを設定するプロパティ |
+| ItemTemplate | データテンプレートを指定 |
+| TextCell | テキストを表示するセル |
+| ImageCell | 画像を表示するセル |
+| ViewCell | グリッドを表示するセル |
+| SelectedItem | 選択した要素のオブジェクト |
+| SelectedMode | 選択モード（シングルのみ） |
+| Header | ヘッダーの定義 |
+| Footer | フッターの定義 |
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/listview?view=net-maui-9.0
+
+#### CollectionView コントロール
+
+ListViewと異なり複数選択が可能。  
+MSの解説を見る限り、かなり柔軟なもよう（その分、ややこしい）
+
+##### XAML
+```
+<CollectionView>
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            表示するコントロール
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>
+```
+
+##### よく使うCollectionViewコントロールの属性
+
+| 属性(プロパティ) | 説明 |
+|-------|-------|
+| ItemSource | コレクションを設定するプロパティ |
+| ItemTemplate | データテンプレートを指定 |
+| SelectedItem | 選択した要素のオブジェクト |
+| SelectedItems | 選択した複数の要素のオブジェクト |
+| SelectedMode | 選択モード（シングルのみ） |
+| Header | ヘッダーの定義 |
+| Footer | フッターの定義 |
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/collectionview/?view=net-maui-9.0
+
+
+### ピッカー
+
+いわゆる Combobox コントロール
+
+#### XAML
+
+```
+<Picker
+    x:Name="<オブジェクト名>"
+    SecectedIndexChanged="<イベントメソッド名>"
+    ・・・ />
+```
+
+#### よく使う Picker コントロールの属性
+
+| 属性(プロパティ) | 説明 | 例 |
+|-------|-------|----|
+| FontSize | フォントサイズ | 18 |
+| HorizontalTextAlignment | 水平方向の位置 | "Center" |
+| VerticalTextAlignment | 垂直方向の位置 | "Left" |
+| ItemSource | 表示するリストオブジェクト |  |
+| SelectedIndex | 選択した項目の位置 |  |
+| SelectedItem | 選択した項目 |  |
+| TextColor | テキストの色 | "Green" |
+
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/picker?view=net-maui-9.0
+
+### スイッチ
+
+いわゆる Checkbox コントロール
+
+#### XAML
+
+```
+<Switch
+    x:Name="<オブジェクト名>"
+    Toggled="<イベント>" />
+```
+
+#### よく使う Switch コントロールの属性
+
+| 属性(プロパティ) | 説明 | 例 |
+|----|----|----|
+| OnColor | ONの時の色 | "Orange" |
+| ThumbColor | 丸いボタンの色 | "Red" |
+| IsToggled | トグルの状態 | "True" |
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/switch?view=net-maui-9.0
+
+
+### 日付選択
+
+#### XAML
+```
+<DatePicker
+    x:Name="<オブジェクト名>"
+    DateSelected="<イベントメソッド名>" />
+```
+
+#### よく使う 日付コントロールの属性
+
+| 属性(プロパティ) | 説明 | 例 |
+|----|----|----|
+| MinimumDate | 選択可能な最も古い日付 | "2022-01-01" |
+| MaximumDate | 選択可能な最も新しい日付 | "2022-12-31" |
+| Date | 選択中の日付 |  |
+| Format | 日付のフォーマット | "yyyy年MM月dd日" |
+| FontSize | フォントサイズ | 18 |
+
+他  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/datepicker?view=net-maui-9.0
+
+TimePicker  
+https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/timepicker?view=net-maui-9.0&tabs=windows
+
+
+
+
+
+
 
 
