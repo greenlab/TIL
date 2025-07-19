@@ -488,9 +488,17 @@ TimePicker
 https://learn.microsoft.com/ja-jp/dotnet/maui/user-interface/controls/timepicker?view=net-maui-9.0&tabs=windows
 
 
+## 5. データバインド
 
+### MVVMパターンとは
 
+- V ： View は、XAML等で作成したユーザーインターフェイス部分を示す。
+- M ： Model は、データを保持するためのクラス。
+- VM : ViewModel は、View と Model を繋ぐ部分、業務ロジックの実装部分でもある。
 
+Model は、Entity Framework を利用したデータクラスを対象にすることが多い。とのことだが、Entity Framework 使っていないので、よくわかっていないという…。
+
+ベーシック(?)な MVVM パターンの実装例ありましたが、難しい…。
 
 
 
