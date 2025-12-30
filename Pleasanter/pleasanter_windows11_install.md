@@ -156,7 +156,7 @@ PS > dotnet Implem.CodeDefiner.dll _rds /l "ja" /z "Tokyo Standard Time"
 
 4.1.8.8. プリザンターのログイン画面にて「ログインID: Administrator」、「初期パスワード: pleasanter」を入力し、「ログイン」ボタンをクリックします。
 
-4.1.8.9. パスワード変更 GreenLab0429
+4.1.8.9. パスワード変更 
 
 ### 4.2. プリザンターからメールを送信できるように設定する  
 
