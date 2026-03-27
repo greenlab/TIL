@@ -17,3 +17,24 @@ $ sudo apt -y install task-japanese-gnome-desktop language-pack-gnome-ja-base la
 ```
 OS 再起動
 
+## 2. VSCode インストール
+エディタを拡充する。
+
+[参照した元ネタ](https://code.visualstudio.com/docs/setup/linux#_install-vs-code-on-linux)
+
+1. 上のリンク先から debパッケージをダウンロード
+2. 下記実行 ※debパッケージ名はダウンロード時のバージョンに応じて変更
+  ```bash
+  $ cd Downloads
+  $ sudo apt install ./code_1.113.0-1774364744_amd64.deb
+  ```
+3. VSCodeを起動して、Extensionsから、'Japanese Language Pack for Visual Studio Code'をインストール。
+　　インストールが完了すると表示される 'Change Language and Restart' ボタンを押すこと
+
+## 3. Git インストール
+
+[参照した元ネタ](https://www.server-world.info/query?os=Ubuntu_24.04&p=japanese)
+
+```bash
+$ sudo apt -y install git
+```
